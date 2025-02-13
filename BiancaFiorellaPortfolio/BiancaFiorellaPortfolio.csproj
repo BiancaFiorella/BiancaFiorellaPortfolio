@@ -17,7 +17,7 @@
     <ReactProjectDirName Include="bianca-fiorella"/>
   </ItemGroup>
   
-  <Target Name="NpmRunBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+  <Target Name="BuildReactProject" AfterTargets="Publish" Condition="'$(Configuration)' == 'Release'">
     <CombinePath BasePath="$(SolutionDir)" Paths="@(ReactProjectDirName)" >
       <Output TaskParameter="CombinedPaths" ItemName="ReactProjectFullDir"/>
     </CombinePath>

@@ -3,10 +3,11 @@ import react from '@vitejs/plugin-react-swc';
 
 export default defineConfig((configEnv) => {
   const dotnetVersion = "net9.0";
-  const dotnetFolder = configEnv.mode === "production" ? "Release" : "Debug";
+  const isProduction = configEnv.mode === "production";
+  const dotnetFolder = isProduction ? "Release" : "Debug";
   return {
     build: {
-      outDir: `../BiancaFiorellaPortfolio/bin/${dotnetFolder}/${dotnetVersion}/dist`,
+      outDir: `../BiancaFiorellaPortfolio/bin/${dotnetFolder}/${dotnetVersion}/${(isProduction ? 'publish/' : '')}dist`,
       emptyOutDir: true,
       copyPublicDir: true,
     },
