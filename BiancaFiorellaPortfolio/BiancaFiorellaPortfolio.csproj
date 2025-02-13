@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -13,4 +13,16 @@
     <None Remove="bin\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ReactProjectDirName Include="bianca-fiorella"/>
+  </ItemGroup>
+  
+  <Target Name="NpmRunBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <CombinePath BasePath="$(SolutionDir)" Paths="@(ReactProjectDirName)" >
+      <Output TaskParameter="CombinedPaths" ItemName="ReactProjectFullDir"/>
+    </CombinePath>
+    <Exec Command="npm install" WorkingDirectory="@(ReactProjectFullDir)" />
+    <Exec Command="npm run build" WorkingDirectory="@(ReactProjectFullDir)" />
+  </Target>
+  
 </Project>
